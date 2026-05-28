@@ -32,7 +32,7 @@ export default function AboutHero() {
             <img
               src="/aboutpage1.webp"
               alt="Shaa David About"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1000ms]"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
           </div>

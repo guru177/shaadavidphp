@@ -35,7 +35,7 @@ export default function AboutPhilosophy() {
           <div className="absolute -bottom-6 -left-6 w-32 h-32 border-4 border-[#395c80]/20 rounded-full -z-0"></div>
 
           {/* Floating Icon */}
-          <div className="absolute -top-6 -left-6 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center z-20 animate-bounce duration-[3000ms]">
+          <div className="absolute -top-6 -left-6 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center z-20 animate-bounce" style={{ animationDuration: '3000ms' }}>
             <img src="/icon.webp" alt="Icon" className="w-10 h-10 opacity-80 animate-[spin_30s_linear_infinite]" />
           </div>
         </div>

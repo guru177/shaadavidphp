@@ -80,6 +80,7 @@ export default function Header() {
             <Link href="/services" className="hover:text-black transition-colors">Services</Link>
 
             <Link href="/product" className="hover:text-black transition-colors">Products</Link>
+            <Link href="/gallery" className="hover:text-black transition-colors">Gallery</Link>
             <Link href="/blogs" className="hover:text-black transition-colors">Blog</Link>
             <Link href="/contact" className="hover:text-black transition-colors">Contact</Link>
           </nav>
@@ -177,6 +178,7 @@ export default function Header() {
                 { name: 'About us', href: '/about', tagline: 'Our journey' },
                 { name: 'Services', href: '/services', tagline: 'Excellence' },
                 { name: 'Products', href: '/product', tagline: 'Innovation' },
+                { name: 'Gallery', href: '/gallery', tagline: 'Visuals' },
                 { name: 'Blog', href: '/blogs', tagline: 'Insights' },
                 { name: 'Contact', href: '/contact', tagline: 'Connect' },
               ].map((link, idx) => (

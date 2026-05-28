@@ -76,7 +76,7 @@ export default function AboutFounder() {
           <div className="absolute -bottom-10 -right-10 w-48 h-48 border-4 border-[#395c80]/20 rounded-[60px] -z-0 transform -rotate-12"></div>
 
           {/* Quote element */}
-          <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl z-20 max-w-[200px] animate-bounce duration-[5000ms]">
+          <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl z-20 max-w-[200px] animate-bounce" style={{ animationDuration: '5000ms' }}>
             <p className="text-[#0c1622] font-malayalam font-bold text-sm leading-relaxed">
               "ഭാഷാ പഠനം ഒരു ആനന്ദമാകട്ടെ"
             </p>
