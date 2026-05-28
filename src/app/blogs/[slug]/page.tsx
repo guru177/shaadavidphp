@@ -69,7 +69,7 @@ const BLOG_POSTS = [
 
 export default function BlogDetailPage() {
   const params = useParams();
-  const slug = params.slug;
+  const slug = params?.slug;
   const post = BLOG_POSTS.find(p => p.slug === slug) || BLOG_POSTS[0];
 
   return (

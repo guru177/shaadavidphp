@@ -2,25 +2,6 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { authConfig } from './auth.config';
 import { z } from 'zod';
-import { PrismaClient } from '@prisma/client';
-import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import { createPool } from 'mariadb';
-
-const pool = createPool({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '',
-  database: 'shaadavid_db',
-  port: 3306,
-  connectionLimit: 1,
-});
-
-const adapter = new PrismaMariaDb(pool as any);
-const prisma = new PrismaClient({ adapter });
-
-console.log('🏁 AUTH.TS: INLINE PRISMA INITIALIZED WITH ROOT');
-
-import bcrypt from 'bcryptjs';
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
@@ -28,22 +9,32 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ username: z.string(), password: z.string().min(6) })
+          .object({ username: z.string(), password: z.string().min(1) })
           .safeParse(credentials);
 
         if (parsedCredentials.success) {
           const { username, password } = parsedCredentials.data;
           
-          console.log('🔍 AUTH.TS: Searching for admin:', username);
-          const admin = await prisma.admin.findUnique({
-            where: { username },
-          });
+          console.log('🔍 AUTH.TS: Searching for admin via PHP API:', username);
+          
+          try {
+            // Replace with your actual PHP backend URL (e.g., XAMPP localhost or production URL)
+            const apiUrl = process.env.NEXT_PUBLIC_PHP_API_URL || 'http://localhost/shaadavidnew/backend/admin_login.php';
+            
+            const res = await fetch(apiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            });
 
-          if (!admin) return null;
-          
-          const passwordsMatch = await bcrypt.compare(password, admin.password);
-          
-          if (passwordsMatch) return { id: admin.id.toString(), name: admin.username };
+            const data = await res.json();
+
+            if (data.status === 'success' && data.user) {
+              return { id: data.user.id.toString(), name: data.user.username };
+            }
+          } catch (error) {
+            console.error('PHP API Login Error:', error);
+          }
         }
 
         console.log('Invalid credentials');
